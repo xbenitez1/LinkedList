@@ -131,6 +131,31 @@ class LinkedList:
         self.length -= 1
         return popped_node
 
+    def remove_duplicates(self):
+        if self.head is None:
+            return
+        node_values = set()  # set to store unique node values
+        current_node = self.head
+        node_values.add(current_node.value)
+        while current_node.next:
+            if current_node.next.value in node_values:  # duplicate found
+                current_node.next = current_node.next.next
+                self.length -= 1
+            else:
+                node_values.add(current_node.next.value)
+                current_node = current_node.next
+        self.tail = current_node
+
+    def reverse(self):
+        prev_node = None
+        current_node = self.head
+        while current_node is not None:
+            next_node = current_node.next
+            current_node.next = prev_node
+            prev_node = current_node
+            current_node = next_node
+        self.head, self.tail = self.tail, self.head
+
     def remove(self, index):
         if index < -1 or index >= self.length:
             return None
@@ -144,6 +169,16 @@ class LinkedList:
         popped_node.next = None
         self.length -= 1
         return popped_node
+
+    def deleteDuplicates(self, head):
+        current_node = self.head
+
+        while current_node is not None and current_node.next is not None:
+            if current_node.val == current_node.next.val:
+                current_node.next = current_node.next.next
+            else:
+                current_node = current_node.next
+        return self.head
 
     def delete_all(self):
         self.head = None
