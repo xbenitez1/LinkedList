@@ -76,7 +76,7 @@ class LinkedList:
             current = current.next
         return False
 
-    def search(self, target):
+    def search_index(self, target):
         current = self.head
         index = 0
         while current is not None:
